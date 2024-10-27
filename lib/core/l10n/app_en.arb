@@ -1,0 +1,14 @@
+{
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+        "description": "The conventional newborn programmer greeting"
+    },
+    "login": "Login",
+    "@login": {
+        "description": "Login page name"
+    },
+    "enter": "Enter",
+    "@enter": {
+        "description": "Enter text to enter button in the login screen"
+    }
+}
