@@ -125,12 +125,3 @@ class SupabaseConnector extends PowerSyncBackendConnector {
     }
   }
 }
-
-/// Global reference to the database
-late final PowerSyncDatabase db;
-
-/// Explicit sign out - clear database and log out.
-Future<void> logout() async {
-  await Supabase.instance.client.auth.signOut();
-  await db.disconnectAndClear();
-}

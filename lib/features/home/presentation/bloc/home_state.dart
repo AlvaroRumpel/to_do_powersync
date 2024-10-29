@@ -7,34 +7,34 @@ sealed class HomeState extends Equatable {
   T when<T>({
     required T Function() initial,
     required T Function() loading,
-    required T Function(Home home) success,
+    required T Function(List<ToDo> toDos) data,
     required T Function(String message) error,
   }) {
     if (this is HomeInitial) {
       return initial();
     } else if (this is HomeLoading) {
       return loading();
-    } else if (this is HomeSuccess) {
-      return success((this as HomeSuccess).home);
+    } else if (this is HomeData) {
+      return data((this as HomeData).toDos);
     } else if (this is HomeError) {
       return error((this as HomeError).message);
     }
     throw Exception('Unreachable');
   }
 
-  T? maybeWhen<T>({
+  T maybeWhen<T>({
     T Function()? initial,
     T Function()? loading,
-    T Function(Home home)? success,
+    T Function(List<ToDo> toDos)? data,
     T Function(String message)? error,
-    required T? Function() orElse,
+    required T Function() orElse,
   }) {
     if (this is HomeInitial && initial != null) {
       return initial();
     } else if (this is HomeLoading && loading != null) {
       return loading();
-    } else if (this is HomeSuccess && success != null) {
-      return success((this as HomeSuccess).home);
+    } else if (this is HomeData && data != null) {
+      return data((this as HomeData).toDos);
     } else if (this is HomeError && error != null) {
       return error((this as HomeError).message);
     } else {
@@ -45,13 +45,13 @@ sealed class HomeState extends Equatable {
   T? whenOrNull<T>({
     T Function()? initial,
     T Function()? loading,
-    T Function(Home home)? success,
+    T Function(List<ToDo> toDos)? data,
     T Function(String message)? error,
   }) {
     return maybeWhen(
       initial: initial,
       loading: loading,
-      success: success,
+      data: data,
       error: error,
       orElse: () => null,
     );
@@ -65,13 +65,13 @@ final class HomeInitial extends HomeState {}
 
 final class HomeLoading extends HomeState {}
 
-final class HomeSuccess extends HomeState {
-  final Home home;
+final class HomeData extends HomeState {
+  final List<ToDo> toDos;
 
-  const HomeSuccess({required this.home});
+  const HomeData({required this.toDos});
 
   @override
-  List<Object?> get props => [home];
+  List<Object?> get props => [toDos];
 }
 
 final class HomeError extends HomeState {

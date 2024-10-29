@@ -15,6 +15,8 @@ class Sync {
 
   Sync({required Backend backend}) : _backend = backend;
 
+  String? get userId => _backend.userId;
+
   Future<String> getDatabasePath() async {
     const dbFilename = 'powersync-to-do.db';
 
@@ -59,5 +61,11 @@ class Sync {
     // Demo using SQLite Full-Text Search with PowerSync.
     // See https://docs.powersync.com/usage-examples/full-text-search for more details
     await configureFts(db);
+  }
+
+  /// Explicit sign out - clear database and log out.
+  Future<void> logout() async {
+    await _backend.signOut();
+    await db.disconnectAndClear();
   }
 }

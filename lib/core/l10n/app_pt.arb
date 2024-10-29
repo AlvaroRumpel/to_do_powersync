@@ -1,5 +1,6 @@
 {
     "helloWorld": "Olá Mundo!",
     "login": "Login",
-    "enter": "Entrar"
+    "enter": "Entrar",
+    "create_account": "Criar conta"
 }

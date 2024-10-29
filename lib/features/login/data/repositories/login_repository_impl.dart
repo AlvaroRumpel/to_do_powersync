@@ -1,4 +1,4 @@
-import 'package:gotrue/src/types/user.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../domain/repositories/login_repository.dart';
 import '../data_sources/login_data_source.dart';

@@ -10,5 +10,9 @@
     "enter": "Enter",
     "@enter": {
         "description": "Enter text to enter button in the login screen"
+    },
+    "create_account": "Create account",
+    "@create_account": {
+        "description": "Create account button on login screen"
     }
 }

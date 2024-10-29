@@ -4,5 +4,5 @@ part of 'routes.dart';
 
 const SPLASH = '/';
 const LOGIN = '/login';
-const LOCATIONS = '/locations';
-const VIDEO_VIEW = '/video-view';
+const REGISTER = '/register';
+const HOME = '/home';

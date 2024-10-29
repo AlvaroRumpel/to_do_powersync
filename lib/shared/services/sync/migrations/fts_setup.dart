@@ -64,14 +64,23 @@ SqliteMigration createFtsMigration({
 /// that correspond to the tables in your schema and populate them
 /// with the data you would like to search on
 Future<void> configureFts(PowerSyncDatabase db) async {
-  migrations.add(
-    createFtsMigration(
-      migrationVersion: 1,
-      tableName: 'to_do',
-      columns: ['task', 'done', 'user_id', 'created_by'],
-      tokenizationMethod: 'porter unicode61',
-    ),
-  );
+  migrations
+    ..add(
+      createFtsMigration(
+        migrationVersion: 1,
+        tableName: 'to_do',
+        columns: ['task', 'done', 'user_id', 'created_at'],
+        tokenizationMethod: 'porter unicode61',
+      ),
+    )
+    ..add(
+      createFtsMigration(
+        migrationVersion: 2,
+        tableName: 'user',
+        columns: ['email', 'deleted_at', 'created_at'],
+        tokenizationMethod: 'porter unicode61',
+      ),
+    );
   await migrations.migrate(db);
 }
 

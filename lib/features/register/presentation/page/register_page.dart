@@ -4,30 +4,29 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../../shared/utils/context_extensions.dart';
-import '../bloc/login_cubit.dart';
+import '../bloc/register_cubit.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _emailEC = TextEditingController();
   final _passEC = TextEditingController();
-  late final _controller = context.read<LoginCubit>();
+  late final _controller = context.read<RegisterCubit>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.localization.login),
+        title: Text(context.localization.create_account),
       ),
-      body: BlocListener<LoginCubit, LoginState>(
+      body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          state.whenOrNull(
-            success: (user) => context.pushReplacementNamed(HOME),
-          );
+          state.whenOrNull(success: () => context.goNamed(HOME));
         },
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -38,13 +37,9 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(controller: _passEC),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () => _controller.login(_emailEC.text, _passEC.text),
+                onPressed: () =>
+                    _controller.createAccount(_emailEC.text, _passEC.text),
                 child: Text(context.localization.enter),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => context.pushNamed(REGISTER),
-                child: Text(context.localization.create_account),
               ),
             ],
           ),
